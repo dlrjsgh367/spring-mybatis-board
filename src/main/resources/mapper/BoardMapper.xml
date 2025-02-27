@@ -3,7 +3,7 @@
 <mapper namespace="com.example.board.mapper.BoardMapper">
 
     <!-- 게시글 목록 조회 -->
-    <select id="getBoardList" resultType="com.example.model.Board">
+    <select id="getBoardList" resultType="com.example.board.model.Board">
     <![CDATA[
         SELECT id,
                title,
@@ -16,7 +16,7 @@
     </select>
 
     <!-- 특정 게시글 조회 -->
-    <select id="getBoardDetail" parameterType="int" resultType="com.example.model.Board">
+    <select id="getBoardDetail" parameterType="int" resultType="com.example.board.model.Board">
     <![CDATA[
         SELECT id,
                title,
@@ -29,7 +29,7 @@
     </select>
 
     <!-- 게시글 등록 -->
-    <insert id="insertBoard" parameterType="com.example.model.Board" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertBoard" parameterType="com.example.board.model.Board" useGeneratedKeys="true" keyProperty="id">
         <![CDATA[
         INSERT INTO board (title, content, writer, created_at)
         VALUES (#{title}, #{content}, #{writer}, NOW())
@@ -37,7 +37,7 @@
     </insert>
 
     <!-- 게시글 수정 -->
-    <update id="updateBoard" parameterType="com.example.model.Board">
+    <update id="updateBoard" parameterType="com.example.board.model.Board">
         <![CDATA[
         UPDATE board
         SET title   = #{title},
