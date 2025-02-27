@@ -2,12 +2,14 @@ package com.example.board.service;
 
 import com.example.board.mapper.BoardMapper;
 import com.example.board.model.Board;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class BoardService {
-    @AutoWired
+    @Autowired
     private BoardMapper boardMapper;
 
     public List<Board> getBoardList(int page, int size) {
