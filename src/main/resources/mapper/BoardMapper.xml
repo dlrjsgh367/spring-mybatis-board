@@ -5,33 +5,35 @@
     <!-- 게시글 목록 조회 -->
     <select id="getBoardList" resultType="com.example.board.model.Board">
     <![CDATA[
-        SELECT id,
-               title,
-               content,
-               writer,
-               created_at
-        FROM board
-        ORDER BY created_at DESC
+        SELECT `id`,
+               `title`,
+               `content`,
+               `writer`,
+               `created_at`
+        FROM `board`
+        ORDER BY `created_at` DESC
+            LIMIT #{size}
+        OFFSET #{offset}
         ]]>
     </select>
 
     <!-- 특정 게시글 조회 -->
     <select id="getBoardDetail" parameterType="int" resultType="com.example.board.model.Board">
     <![CDATA[
-        SELECT id,
-               title,
-               content,
-               writer,
-               created_at
-        FROM board
-        WHERE id = #{id}
+        SELECT `id`,
+               `title`,
+               `content`,
+               `writer`,
+               `created_at`
+        FROM `board`
+        WHERE `id` = #{id}
         ]]>
     </select>
 
     <!-- 게시글 등록 -->
     <insert id="insertBoard" parameterType="com.example.board.model.Board" useGeneratedKeys="true" keyProperty="id">
         <![CDATA[
-        INSERT INTO board (title, content, writer, created_at)
+        INSERT INTO board (`title`, `content`, `writer`, `created_at`)
         VALUES (#{title}, #{content}, #{writer}, NOW())
         ]]>
     </insert>
@@ -40,19 +42,34 @@
     <update id="updateBoard" parameterType="com.example.board.model.Board">
         <![CDATA[
         UPDATE board
-        SET title   = #{title},
-            content = #{content},
-            writer  = #{writer}
-        WHERE id = #{id}
+        SET `title`      = #{title},
+            `content`    = #{content},
+            `writer`     = #{writer},
+            `updated_at` = NOW()
+        WHERE `id` = #{id}
         ]]>
     </update>
 
     <delete id="deleteBoard" parameterType="int">
         <![CDATA[
         DELETE
-        FROM board
-        WHERE id = #{id}
+        FROM `board`
+        WHERE `id` = #{id}
         ]]>
     </delete>
+
+    <select id="searchBoard" parameterType="string" resultType="com.example.board.model.Board">
+        <![CDATA[
+        SELECT `id`,
+               `title`,
+               `content`,
+               `writer`,
+               `created_at`,
+        FROM `board`
+        WHERE `title` LIKE CONCAT('%', #{keyword}, '%')
+           or `content` LIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY `created_at` DESC
+        ]]>
+    </select>
 
 </mapper>
