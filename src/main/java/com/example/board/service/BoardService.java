@@ -9,8 +9,11 @@ import java.util.List;
 
 @Service
 public class BoardService {
-    @Autowired
-    private BoardMapper boardMapper;
+    private final BoardMapper boardMapper;
+
+    public BoardService(BoardMapper boardMapper) {
+        this.boardMapper = boardMapper;
+    }
 
     public List<Board> getBoardList(int page, int size) {
         int offset = (page - 1) * size;
