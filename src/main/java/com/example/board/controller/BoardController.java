@@ -2,7 +2,6 @@ package com.example.board.controller;
 
 import com.example.board.model.Board;
 import com.example.board.service.BoardService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,8 +9,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/board")
 public class BoardController {
-    @Autowired
-    private BoardService boardService;
+    private final BoardService boardService;
+
+    public BoardController(BoardService boardService) {
+        this.boardService = boardService;
+    }
 
     @GetMapping("/list")
     public List<Board> getBoardList(
