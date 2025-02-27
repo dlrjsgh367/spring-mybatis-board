@@ -1,3 +1,5 @@
+CREATE DATABASE mybatis_board;
+
 CREATE TABLE board (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
